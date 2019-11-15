@@ -166,3 +166,5 @@ foreach($include_files as $files) {
         include $f;
     }
 }
+
+get_template_part( 'account' ); 

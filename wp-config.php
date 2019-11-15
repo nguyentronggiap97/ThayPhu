@@ -20,7 +20,7 @@
 
 // ** Thiết lập MySQL - Bạn có thể lấy các thông tin này từ host/server ** //
 /** Tên database MySQL */
-define( 'DB_NAME', 'wordpress_thayphu' );
+define( 'DB_NAME', 'wordpress_thayphu2' );
 
 /** Username của database */
 define( 'DB_USER', 'root' );

@@ -116,7 +116,6 @@
             </script>
             <script type="text/javascript" src="<?php echo TFT_URL ?>/public/libs/owlcarousel/js/owl.carousel.js"></script>
             <script type="text/javascript" src="<?php echo TFT_URL ?>/public/includes/js/scripts.js"></script>
-            <script type="text/javascript" src="<?php echo TFT_URL ?>/public/includes/js/jquery.blockUI.min.js"></script>
             <?php wp_footer() ?>
         </footer>
     </body>

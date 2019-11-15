@@ -129,6 +129,7 @@ function create_member()
 			'editor',
 			'excerpt',
 			'thumbnail',
+			'comments',
 		),
 		'taxonomies' => array(),
 		'hierarchical' => false,

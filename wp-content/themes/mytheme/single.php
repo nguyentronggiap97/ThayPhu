@@ -10,13 +10,6 @@
 <?php 
     $data = get_post();
 
-    // echo '<pre>'.__FILE__.'::'.__METHOD__.'('.__LINE__.')<br>';
-    //     print_r(get_author_name());
-    // echo '</pre>';
-
-    // echo '<pre>'.__FILE__.'::'.__METHOD__.'('.__LINE__.')<br>';
-    //     print_r($data);
-    // echo '</pre>';
 ?>
     <div class="container main_title">
         <h1><?php echo ($data->post_title ?? ""); ?></h1>
@@ -38,25 +31,15 @@
                     <p>
                         <p><?php echo ($data->post_content ?? ""); ?></p>
                     </p>
-                    <!-- <div class="share_icon row p-0 m-0" style="display: block">
-                        <p class="socila_share col-md-6 p-0 "><b>Share: </b>
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.vwthemesdemo.com/vw-lawyer-attorney-pro/2019/06/06/about-clients/" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.vwthemesdemo.com/vw-lawyer-attorney-pro/2019/06/06/about-clients/&title=About Clients&source=About Clients" target="_blank"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                            <a href="https://plus.google.com/share?url=https://www.vwthemesdemo.com/vw-lawyer-attorney-pro/2019/06/06/about-clients/" target="_blank"><i class="fab fa-google-plus-g" aria-hidden="true"></i></a>
-                            <a href="https://twitter.com/share?url=https://www.vwthemesdemo.com/vw-lawyer-attorney-pro/2019/06/06/about-clients/&amp;text=About Clients" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        </p>
-                        <p class="col-md-6 post_tag"></p>
-                    </div> -->
-                    <?php
-	                $list_cates = get_the_category(get_the_ID());
-                    ?>
+                    <?php $list_cates = get_the_category(get_the_ID()); ?>
                     <div class="post_ctg font-weight-bold"><span>Categories: </span>
                         <ul class="post-categories">
 			                <?php foreach($list_cates as $key => $value){ ?>
                                 <li><a href="<?php echo get_category_link($value->term_id); ?>"><?php echo $value->name; ?></a>
-			                <?php } ?>
+			                <?php } ?> 
                         </ul>
                     </div>
+                    <?php echo comment_form() ?>
                 </div>
                 <div class="clearfix"></div>
             </div>

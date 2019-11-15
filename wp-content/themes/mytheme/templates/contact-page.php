@@ -7,14 +7,14 @@
 <?php get_header(  ) ?>
 <?php 
 
-$address1 = get_field('contact_addres_1','option');
-$address2 = get_field('contact_addres_2','option');
-$website = get_field('wf_contact_website','option');
-$mail = get_field('contact_mail','option');
-$phone = get_field('contact_phone','option');
-$time1 = get_field('contact_time_1','option');
-$time2 = get_field('contact_time_2','option');
-$map = get_field('google_map','option');
+$address1 = get_field('contact_addres_1', 141);
+$address2 = get_field('contact_addres_2', 141);
+$website = get_field('wf_contact_website', 141);
+$mail = get_field('contact_mail', 141);
+$phone = get_field('contact_phone', 141);
+$time1 = get_field('contact_time_1', 141);
+$time2 = get_field('contact_time_2', 141);
+$map = get_field('google_map', 141);
 ?>
 <div class="contact-box">
     <div class="container">

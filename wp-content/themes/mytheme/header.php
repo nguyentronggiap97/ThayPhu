@@ -29,9 +29,9 @@
 	<link rel="stylesheet" href="<?php echo TFT_URL ?>/public/includes/fontawesome/solid.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="<?php echo TFT_URL ?>/public/includes/fontawesome/regular.css" type="text/css" media="all">
 	<link rel="stylesheet" href="<?php echo TFT_URL ?>/public/includes/css/bootstrap.min.css" type="text/css" media="all">
-	<link rel="stylesheet" href="<?php echo TFT_URL ?>/public/includes/css/style.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="<?php echo TFT_URL ?>/public/css/style.min.css" type="text/css" media="all">
 	<!-- <link rel="stylesheet" href="<?php echo TFT_URL ?>/public/includes/css/owl.carousel.css" type="text/css" media="all"> -->
-	<link rel="stylesheet" href="<?php echo TFT_URL ?>/public/includes/css/styles.css" type="text/css" media="all">
+	<link rel="stylesheet" href="<?php echo TFT_URL ?>/public/css/styles.css" type="text/css" media="all">
     <link rel="stylesheet" href="<?php echo TFT_URL ?>/public/libs/owlcarousel/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?php echo TFT_URL ?>/public/libs/owlcarousel/css/owl.theme.default.min.css">
 	<style id="woocommerce-inline-inline-css" type="text/css">
@@ -74,7 +74,7 @@
 			<div class="container">
 				<div class="row pt-1 pb-1">
 					<div class="logo col-md-4 col-sm-12 col-12 text-sm-center text-md-left">
-						<a href="vw-lawyer-attorney-pro/" class="custom-logo-link" rel="home" itemprop="url"><img width="240" height="66" src="includes/images/Logo.png" class="custom-logo" alt="Lawyer WordPress Theme" itemprop="logo"></a>
+						<a href="<?php echo home_url() ?>" class="custom-logo-link" rel="home" itemprop="url"><img width="240" height="66" src="<?php echo TFT_URL ?>/public/images/Logo.png" class="custom-logo" alt="Lawyer WordPress Theme" itemprop="logo"></a>
 					</div>
 					<?php
 						$address1 = get_field('contact_addres_1','option');
@@ -154,7 +154,7 @@
 								<span><i class="fas fa-search"></i></span>
 							</li>
 							<li class="consultation">
-								<a href="vw-lawyer-attorney-pro/#"><i class="fas fa-headphones"></i><span>Tư vấn miễn phí</span></a>
+								<a href="<?php echo get_permalink(141); ?>"><i class="fas fa-headphones"></i><span>Tư vấn miễn phí</span></a>
 							</li>
 						</ul>
 					</div>
