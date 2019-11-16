@@ -1,4 +1,19 @@
+<?php
 
+$text_content = get_field('footer_text_content', 'option');
+$copy_right = get_field('footer_copy_right', 'option');
+$link = get_field('footer_link', 'option');
+
+$arg = [
+    'numberposts'      => 3,
+    'category'         => 0,
+    'orderby'          => 'date',
+    'order'            => 'DESC',
+    'post_type'        => 'post',
+];
+
+$post_recent =  get_posts($arg);
+?>
         <div class="outer-footer" style="background-image:url(<?php echo TFT_URL ?>/public/includes/images/footer-bg.jpg)">
 
             <div id="vw_footer">
@@ -9,8 +24,7 @@
                                 <aside id="text-3" class="widget widget_text">
                                     <div class="textwidget">
                                         <p><img class="alignnone size-full wp-image-56" src="<?php echo TFT_URL ?>/public/includes/images/Logo.png" alt="" width="240" height="66"></p>
-                                        <p>This Lawyer WordPress Theme is skillfully built for lawyers, advocates, law agents, legal practitioners, legal consultancies, or any legal websites.</p>
-                                        <p>This is one of the most finely made themes in the list of VW WordPress Themes that does justice with the kind of results expected from it.</p>
+                                        <?php echo $text_content ?? "" ?>
                                     </div>
                                 </aside>
                             </div>
@@ -18,45 +32,38 @@
                                 <aside id="recent-posts-5" class="widget widget_recent_entries">
                                     <h3 class="widget-title">Recent Posts</h3>
                                     <ul>
+
+                                        <?php 
+                                        foreach ($post_recent as $key => $data) {
+                                        ?>
+
                                         <li>
                                             <div class="row recent-post-box">
                                                 <div class="post-thumb col-md-4 col-sm-4 col-4">
-                                                    <img width="370" height="266" src="<?php echo TFT_URL ?>/public/includes/images/latest-post-img3.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="vw-lawyer-attorney-pro/wp-content/uploads/sites/20/2019/06/latest-post-img3.jpg 370w, vw-lawyer-attorney-pro/wp-content/uploads/sites/20/2019/06/latest-post-img3-300x216.jpg 300w" sizes="(max-width: 370px) 100vw, 370px"> </div>
+                                                    <img width="370" height="266" src="<?php echo (!empty(get_the_post_thumbnail_url($data->ID)) ? get_the_post_thumbnail_url($data->ID) : (TFT_URL . "/public/includes/images/default-image.jpg")); ?>" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" sizes="(max-width: 370px) 100vw, 370px"> </div>
                                                 <div class="post-content col-md-8 col-sm-8 col-8">
-                                                    <a href="vw-lawyer-attorney-pro/2019/06/06/current-status/">Current Status</a>
+                                                    <a href="<?php echo get_the_permalink($data->ID); ?>"><?php echo $data->post_title ?? "" ?></a>
                                                 </div>
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="row recent-post-box">
-                                                <div class="post-thumb col-md-4 col-sm-4 col-4">
-                                                    <img width="370" height="266" src="<?php echo TFT_URL ?>/public/includes/images/latest-post-img2.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="vw-lawyer-attorney-pro/wp-content/uploads/sites/20/2019/06/latest-post-img2.jpg 370w, vw-lawyer-attorney-pro/wp-content/uploads/sites/20/2019/06/latest-post-img2-300x216.jpg 300w" sizes="(max-width: 370px) 100vw, 370px"> </div>
-                                                <div class="post-content col-md-8 col-sm-8 col-8">
-                                                    <a href="vw-lawyer-attorney-pro/2019/06/06/daily-updates/">Daily Updates</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="row recent-post-box">
-                                                <div class="post-thumb col-md-4 col-sm-4 col-4">
-                                                    <img width="370" height="266" src="<?php echo TFT_URL ?>/public/includes/images/latest-post-img1.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="vw-lawyer-attorney-pro/wp-content/uploads/sites/20/2019/06/latest-post-img1.jpg 370w, vw-lawyer-attorney-pro/wp-content/uploads/sites/20/2019/06/latest-post-img1-300x216.jpg 300w" sizes="(max-width: 370px) 100vw, 370px"> </div>
-                                                <div class="post-content col-md-8 col-sm-8 col-8">
-                                                    <a href="vw-lawyer-attorney-pro/2019/06/06/about-clients/">About Clients</a>
-                                                </div>
-                                            </div>
-                                        </li>
+
+                                        <?php } ?>
                                     </ul>
                                 </aside>
                             </div>
                             <div class="col-lg-3 col-sm-6">
                                 <aside id="meta-4" class="widget widget_meta">
-                                    <h3 class="widget-title">Meta</h3>
-                                    <ul>
-                                        <li><a href="vw-lawyer-attorney-pro/wp-login.php">Log in</a></li>
-                                        <li><a href="vw-lawyer-attorney-pro/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
-                                        <li><a href="vw-lawyer-attorney-pro/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
-                                        <li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
-                                    </ul>
+                                    <h3 class="widget-title">Link</h3>
+									<?php
+									wp_nav_menu(array(                                           //Hàm lấy ra 1 menu
+										'theme_location' => 'tw-footer-menu',   //lấy id của menu
+										'menu_class' => 'clearfix mobile_nav sf-js-enabled sf-arrows',                 //class của menu
+										'menu_id' => 'menu-menu-1',                            //id của menu
+										'menu'=> 'tw-footer-menu',// as theme_location
+										'container' => false,                      // bỏ div "container "
+										'items_wrap'      => '<ul id="menu-menu-1" class="clearfix mobile_nav sf-js-enabled sf-arrows">%3$s</ul>',
+									));
+									?>
                                 </aside>
                             </div>
                             <div class="col-lg-3 col-sm-6">
@@ -82,21 +89,22 @@
                 <div class="container">
                     <div class="row main_sociobox">
                         <div class="col-md-6 col-sm-12">
-                            <p>Lawyer Wordpress Theme 2017 | All Rights Reserved.<span class="credit-link text-right">  Design &amp; Developed by<a href="https://www.vwthemes.com/" target="_blank" rel="nofollow"> VW Themes</a></span>
+                            <p><?php echo $copy_right ?? "" ?><span class="credit-link text-right">  Design &amp; Developed by<a href="https://www.vwthemes.com/" target="_blank" rel="nofollow"> VW Themes</a></span>
                             </p>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="socialbox">
-                                <a class="twitter" href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter align-middle" aria-hidden="true"></i></a>
-                                <a class="insta" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram align-middle" aria-hidden="true"></i></a>
-                                <a class="facebook" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f align-middle " aria-hidden="true"></i></a>
-                                <a class="youtube" href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube align-middle" aria-hidden="true"></i></a>
-                                <a class="pintrest" href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-p align-middle " aria-hidden="true"></i></a>
-                                <a class="linkedin" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in align-middle" aria-hidden="true"></i></a>
-                                <a class="tumbler" href="https://www.tumblric.com/" target="_blank"><i class="fab fa-tumblr align-middle" aria-hidden="true"></i></a>
-                                <a class="gplus" href="https://www.plus.google.com/" target="_blank"><i class="fab fa-google-plus-g align-middle" aria-hidden="true"></i></a>
-                                <a class="flicker" href="https://www.flickr.com/" target="_blank"><i class="fab fa-flickr align-middle " aria-hidden="true"></i></a>
-                                <a class="vk" href="https://www.ervk.com/" target="_blank"><i class="fab fa-vk align-middle " aria-hidden="true"></i></a>
+                                <?php 
+                                foreach (($link ?? []) as $key => $value) {
+                                    $class = $key;
+                                    if($key == 'pintrest') $class =  'pinterest-p';
+                                    if($key == 'linkedin') $class =  'linkedin-in';
+                                    if($key == 'flicker') $class =  'flickr';
+                                    if($key == 'tumbler') $class =  'tumblr';
+                                     
+                                    echo "<a class='" .($key == 'instagram' ? 'insta' : $key). "' href='$value target='_blank'><i class='fab fa-$class align-middle' aria-hidden='true'></i></a>";
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

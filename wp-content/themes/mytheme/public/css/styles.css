@@ -134,3 +134,18 @@ div.wpcf7 .wpcf7-submit:disabled {
     border: 5px solid transparent;
     border-top-color: #e1e1e1;
 }
+.wp1s-bxslider img{
+	width: 100% !important;
+}
+.wp1s-caption-wrapper.wp1s-caption-topleft, .wp1s-caption-wrapper.wp1s-caption-middleleft, .wp1s-caption-wrapper.wp1s-caption-bottomleft{
+	margin: 20px 15% !important;
+	padding: 15px;
+	background: rgba(0, 0, 0, 0.49019607843137253);
+}
+.wps1-readmore-button{
+	border: 1px solid #fff !important;
+	border-radius: 0px !important;
+}
+.wp1s-slider-wrapper{
+	padding-bottom: 0px !important;
+}

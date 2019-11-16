@@ -24,9 +24,6 @@ if($current_act=='logout') {
 /* 
     Template Name: Login page
 */
-
-
-
 ?>
 
 <?php get_header() ?>

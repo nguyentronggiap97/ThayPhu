@@ -4,7 +4,7 @@
 */
 
 // add_action( 'wf_home_hook','wf_home_page_banner', 10 );
-// add_action( 'wf_home_hook','wf_home_page_banner', 15 );
+add_action( 'wf_home_hook','wf_home_page_banner', 15 );
 add_action( 'wf_home_hook','wf_home_page_why_us_me', 20 );
 add_action( 'wf_home_hook','wf_home_page_our_service', 25 );
 add_action( 'wf_home_hook','wf_home_page_practice', 30 );
@@ -33,29 +33,8 @@ function wf_home_page_banner() {
 	$_value = $data['value'];
 	?>
 	<section id="slider">
-		<div id="carouselExampleIndicators" class="carousel slide carousel-fade " data-ride="carousel">
-			<div class="carousel-innerx" role="listbox">
-			
-				<?php foreach ($_value as $key => $value) { ?>
-					<div class="item-x">
-						<img src="<?php echo ($value['image']['url'] ?? "") ?>" alt="1" title="#slidecaption1">
-						<div class="carousel-caption d-none d-md-block">
-							<div class="inner_carousel">
-								<h5 class="font-weight-bold"><?php echo $value['title'] ?></h5>
-								<div class="font-weight-bold prop_desc"><?php echo $value['content'] ?></p></div>
-							</div>
-						</div>
-					</div>
-				<?php } ?>
-			</div>
-			<!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"><i class="fas fa-long-arrow-alt-left"></i></span>
-				<span class="sr-only">Previous</span>
-			</a>
-			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"><i class="fas fa-long-arrow-alt-right"></i></span>
-				<span class="sr-only">Next</span>
-			</a> -->
+		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+			<?php echo do_shortcode("[wp1s id='219']"); ?>
 		</div>
 		<div class="clearfix"></div>
 	</section>

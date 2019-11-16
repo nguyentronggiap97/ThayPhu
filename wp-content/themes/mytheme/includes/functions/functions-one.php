@@ -175,19 +175,19 @@ add_action('init', 'create_member');
 
 
 if(function_exists('acf_add_options_page')) {
-	// $parent = acf_add_options_page(array(
-	// 	'page_title' 	=> 'Tùy chỉnh thông tin chung',
-	// 	'menu_title'	=> 'Tùy chỉnh',
-	// 	'position' => '59',
-	// 	'redirect' 		=> false,
-	// 	'icon_url' => 'dashicons-admin-generic'
-	// ));
+	$parent = acf_add_options_page(array(
+		'page_title' 	=> 'Tùy chỉnh thông tin chung',
+		'menu_title'	=> 'Tùy chỉnh',
+		'position' => '59',
+		'redirect' 		=> false,
+		'icon_url' => 'dashicons-admin-generic'
+	));
 	
-	// acf_add_options_sub_page(array(
-	// 	'page_title' 	=> 'Tùy Chỉnh Liên hệ',
-	// 	'menu_title'	=> 'Liên hệ',
-	// 	'parent_slug' => $parent['menu_slug'],
-	// ));
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Tùy Chỉnh ',
+		'menu_title'	=> 'Footer',
+		'parent_slug' => $parent['menu_slug'],
+	));
 
 	// acf_add_options_sub_page(array(
 	// 	'page_title' 	=> 'Tùy Chỉnh Trang Giới Thiệu',

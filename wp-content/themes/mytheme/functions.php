@@ -102,7 +102,7 @@ add_action( 'after_setup_theme',function() {
 
     register_nav_menus( array(
         'primary-menu' => esc_html__( 'Menu Chính', 'twtheme' ),
-        // 'tw-footer-menu' => esc_html__( 'Menu Chân', 'twtheme' ),
+        'tw-footer-menu' => esc_html__( 'Menu Chân', 'twtheme' ),
         // 'tw-siderbar' => esc_html__( 'Menu Sidebar', 'twtheme' ),
     ));
 });
@@ -166,5 +166,3 @@ foreach($include_files as $files) {
         include $f;
     }
 }
-
-get_template_part( 'account' ); 
