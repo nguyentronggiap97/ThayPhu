@@ -4,6 +4,13 @@
  * @author Nguyen Trong Giap
  * @link http://fb.com/nguyentronggiap.5
  */
+
+if(is_category('dich-vu')){
+    get_template_part('content','single-cate-ervice');
+}else{
+    get_template_part('content','single.php');
+}
+
 ?>
 <?php get_header(); ?>
 <?php while(have_posts()){ the_post(); ?>

@@ -13,7 +13,7 @@ $count = 1;
             <h1>Faq</h1>
         </div>
     </div>
-    <img src="<?php echo TFT_URL ?>/public/images/about-us-300x75.jpg">
+    <img src="<?php echo TFT_URL ?>/public/images/about-us.jpg">
 </div>
 <div class="container main_title" style="display:none;">
     <h1>Faq</h1>

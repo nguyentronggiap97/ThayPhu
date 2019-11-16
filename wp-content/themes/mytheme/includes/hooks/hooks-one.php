@@ -160,7 +160,7 @@ function wf_home_page_our_service(){
 					<?php } ?>
 
 					<div class="view-more">
-						<a class="btn btn-outline-secondary" href="vw-lawyer-attorney-pro/Add%20link">View More Services</a>
+						<a class="btn btn-outline-secondary" href="<?php echo get_permalink($value->ID) ?>">View More Services</a>
 					</div>
 				</div>
 			</div>
@@ -243,7 +243,6 @@ function wf_home_page_how_work(){
 	$title = get_field("how_work_big_title", 9);
 	$dataList = get_field("how_work_items", 9);
 	
-	
 	?>
 	<section id="how_it_work" style="background-image:url(<?php echo TFT_URL ?>/public/includes/images/why-choose-us-bgimg.jpg)">
 		<div class="">
@@ -283,90 +282,73 @@ function wf_home_page_how_work(){
 
 
 function wf_home_page_attorney(){ 
+
+	
+	
+	$list_member = new WP_Query([
+		'post_type' => 'thanh-vien',
+		'tax_query' => array(                 
+			'relation' => 'AND',                  
+			  array(
+				'taxonomy' => 'chuc-vu',            
+				'field' => 'slug',            
+				'terms' => array( 'luat-su' ),
+				'include_children' => true,       
+				'operator' => 'IN'                
+			  )
+			),
+	]);
 	?>
 	<section id="attorney" style="">
 		<div class="innerbox">
 			<div class="container">
 				<h2><span class="heading2">Our Attorneys</span></h2>
 				<div class="owl-carousel owl-loaded owl-drag">
-
 					<div class="owl-stage-outer">
 						<div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1120px;">
-							<div class="owl-item active" style="width: 363.333px; margin-right: 10px;">
-								<div class="active">
-									<div class="attorneys_box">
-										<div class="image-box ">
-											<img width="370" height="370" src="<?php echo TFT_URL ?>/public/includes/images/attorney3.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="<?php echo TFT_URL ?>/public/includes/images/attorney3.jpg 370w, <?php echo TFT_URL ?>/public/includes/images/attorney3-150x150.jpg 150w, <?php echo TFT_URL ?>/public/includes/images/attorney3-300x300.jpg 300w, <?php echo TFT_URL ?>/public/includes/images/attorney3-100x100.jpg 100w" sizes="(max-width: 370px) 100vw, 370px">
-											<div class="attorneys-box w-100 float-left">
-												<h4 class="attorney_name"><a href="vw-lawyer-attorney-pro/attorney/robert-joseph/">Robert Joseph</a></h4>
-												<p>Business Lawyer</p>
-											</div>
-										</div>
-										<div class="content_box w-100 float-left">
-											<div class="short_text pt-3">Te obtinuit ut adepto satis somno. Aliisque institoribus iter deliciae vivet vita. Nam exempli gratia, quotiens ego vadam ad diversorum peregrinorum in mane ut effingo</div>
-											<div class="about-socialbox pt-3">
-												<p>123-456-789</p>
-												<div class="att_socialbox">
-													<a class="" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-													<a class="" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-													<a class="" href="https://plus.google.com/" target="_blank"><i class="fab fa-google-plus-g"></i></a>
-													<a class="" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+						
+							<?php 
+							while( $list_member->have_posts()){
+								$list_member->the_post();
+								$data = $post;
+								$terms = get_the_terms($post->ID, 'chuc-vu');
+								$name_terms = "";
+								foreach ($terms as $key => $value) {
+									$name_terms .= $value->name . ($key != count($terms)-1 ? ', ': '');
+								}
+								$more_infor = get_field('info-members', $post->ID);
+							?>
 							<div class="owl-item active" style="width: 363.333px; margin-right: 10px;">
 								<div class="">
 									<div class="attorneys_box">
 										<div class="image-box ">
-											<img width="370" height="370" src="<?php echo TFT_URL ?>/public/includes/images/attorney2.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="<?php echo TFT_URL ?>/public/includes/images/attorney2.jpg 370w, <?php echo TFT_URL ?>/public/includes/images/attorney2-150x150.jpg 150w, <?php echo TFT_URL ?>/public/includes/images/attorney2-300x300.jpg 300w, <?php echo TFT_URL ?>/public/includes/images/attorney2-100x100.jpg 100w" sizes="(max-width: 370px) 100vw, 370px">
+											<img width="370" height="370" src="<?php echo (!empty(get_the_post_thumbnail_url($data->ID)) ? get_the_post_thumbnail_url($data->ID) : (TFT_URL . "/public/includes/images/default-image.jpg")); ?>" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" sizes="(max-width: 370px) 100vw, 370px">
 											<div class="attorneys-box w-100 float-left">
-												<h4 class="attorney_name"><a href="vw-lawyer-attorney-pro/attorney/raul/">Raul</a></h4>
-												<p>Crime Lawyer</p>
+											<h4 class="attorney_name"><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></h4>
+											<p><?php echo $name_terms ?? "" ?></p>
 											</div>
 										</div>
 										<div class="content_box w-100 float-left">
-											<div class="short_text pt-3">Te obtinuit ut adepto satis somno. Aliisque institoribus iter deliciae vivet vita. Nam exempli gratia, quotiens ego vadam ad diversorum peregrinorum in mane ut effingo</div>
+											<div class="short_text pt-3"><?php echo get_the_excerpt() ?? "" ?></div>
 											<div class="about-socialbox pt-3">
-												<p>123-456-789</p>
+												<?php echo "<p>" . $more_infor['phone'] . "</p>" ?? "" ?>
 												<div class="att_socialbox">
-													<a class="" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-													<a class="" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-													<a class="" href="https://plus.google.com/" target="_blank"><i class="fab fa-google-plus-g"></i></a>
-													<a class="" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+													<?php 
+													$_count = 0;
+													foreach (($more_infor['link'] ?? []) as $key => $value) {
+														if(empty($value)) continue;
+														echo "<a class='' href='$value target='_blank'><i class='fab fa-$key'></i></a>";
+														++$_count;
+														if($_count == 5) echo "</br>";
+													}
+													?>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="owl-item active" style="width: 363.333px; margin-right: 10px;">
-								<div class="">
-									<div class="attorneys_box">
-										<div class="image-box ">
-											<img width="370" height="370" src="<?php echo TFT_URL ?>/public/includes/images/attorney1.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="<?php echo TFT_URL ?>/public/includes/images/attorney1.jpg 370w, <?php echo TFT_URL ?>/public/includes/images/attorney1-150x150.jpg 150w, <?php echo TFT_URL ?>/public/includes/images/attorney1-300x300.jpg 300w, <?php echo TFT_URL ?>/public/includes/images/attorney1-100x100.jpg 100w" sizes="(max-width: 370px) 100vw, 370px">
-											<div class="attorneys-box w-100 float-left">
-												<h4 class="attorney_name"><a href="vw-lawyer-attorney-pro/attorney/riya-mathur/">Riya Mathur</a></h4>
-												<p>Family Lawyer</p>
-											</div>
-										</div>
-										<div class="content_box w-100 float-left">
-											<div class="short_text pt-3">Te obtinuit ut adepto satis somno. Aliisque institoribus iter deliciae vivet vita. Nam exempli gratia, quotiens ego vadam ad diversorum peregrinorum in mane ut effingo</div>
-											<div class="about-socialbox pt-3">
-												<p>123-456-789</p>
-												<div class="att_socialbox">
-													<a class="" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-													<a class="" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-													<a class="" href="https://plus.google.com/" target="_blank"><i class="fab fa-google-plus-g"></i></a>
-													<a class="" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+						<?php } ?>
 						</div>
 					</div>
 					<div class="owl-nav disabled">

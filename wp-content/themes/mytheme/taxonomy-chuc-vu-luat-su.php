@@ -52,9 +52,10 @@
                                     <?php 
                                     $_count = 0;
                                     foreach (($more_infor['link'] ?? []) as $key => $value) {
+                                        if($value == null) continue;
                                         echo "<a class='' href='$value target='_blank'><i class='fab fa-$key'></i></a>";
                                         ++$_count;
-                                        if($_count == 6) break;
+                                        if($_count == 6) echo "<br>";
                                     }
                                     ?>
                                 </div>

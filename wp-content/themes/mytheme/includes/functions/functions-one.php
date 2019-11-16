@@ -150,7 +150,7 @@ function create_member()
 } 
 
 
-function add_dich_vu() { 
+function add_chuc_vu() { 
 		/* Biến $label chứa các tham số thiết lập tên hiển thị của Taxonomy 
 		*/ 
 		$labels = array( 
@@ -170,30 +170,30 @@ function add_dich_vu() {
 		register_taxonomy('chuc-vu', 'thanh-vien', $args); 
 } 
 // Hook into the 'init' action 
-add_action('init', 'add_dich_vu', 30); 
+add_action('init', 'add_chuc_vu', 30); 
 add_action('init', 'create_member'); 
 
 
 if(function_exists('acf_add_options_page')) {
-	$parent = acf_add_options_page(array(
-		'page_title' 	=> 'Tùy chỉnh thông tin chung',
-		'menu_title'	=> 'Tùy chỉnh',
-		'position' => '59',
-		'redirect' 		=> false,
-		'icon_url' => 'dashicons-admin-generic'
-	));
+	// $parent = acf_add_options_page(array(
+	// 	'page_title' 	=> 'Tùy chỉnh thông tin chung',
+	// 	'menu_title'	=> 'Tùy chỉnh',
+	// 	'position' => '59',
+	// 	'redirect' 		=> false,
+	// 	'icon_url' => 'dashicons-admin-generic'
+	// ));
 	
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Tùy Chỉnh Liên hệ',
-		'menu_title'	=> 'Liên hệ',
-		'parent_slug' => $parent['menu_slug'],
-	));
+	// acf_add_options_sub_page(array(
+	// 	'page_title' 	=> 'Tùy Chỉnh Liên hệ',
+	// 	'menu_title'	=> 'Liên hệ',
+	// 	'parent_slug' => $parent['menu_slug'],
+	// ));
 
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Tùy Chỉnh Trang Giới Thiệu',
-		'menu_title'	=> 'Trang giới thiệu',
-		'parent_slug' => $parent['menu_slug'],
-	));
+	// acf_add_options_sub_page(array(
+	// 	'page_title' 	=> 'Tùy Chỉnh Trang Giới Thiệu',
+	// 	'menu_title'	=> 'Trang giới thiệu',
+	// 	'parent_slug' => $parent['menu_slug'],
+	// ));
 	
 	$parent2 = acf_add_options_page(array(
 		'page_title' 	=> 'hiden page option',

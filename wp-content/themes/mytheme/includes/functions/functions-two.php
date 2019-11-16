@@ -1,6 +1,33 @@
 <?php 
 
 
+
+
+function dieuhau_restrict_editing( $allcaps, $cap, $args ) {
+    // Bail out if we're not asking to edit or delete a post ...
+    if( 'edit_post' != $args[0] && 'delete_post' != $args[0]
+      // ... or user is admin
+      || !empty( $allcaps['manage_options'] )
+      // ... or user already cannot edit the post
+      || empty( $allcaps['edit_posts'] ) )
+        return $allcaps;
+ 
+    // Load the post data:
+    $post = get_post( $args[2] );
+ 
+    // Bail out if the post isn't published:
+    if( 'publish' != $post->post_status )
+        return $allcaps;
+ 
+    //if post is older than 30 days. Change it to meet your needs
+    if( strtotime( $post->post_date ) < strtotime( '-30 day' ) ) {
+        //Then disallow editing.
+        $allcaps[$cap[0]] = FALSE;
+    }
+    return $allcaps;
+}
+
+
 function hidden_in_admin_page($page = 'hiden-page-option')
 {
 	?>
@@ -27,7 +54,7 @@ function hidden_in_admin_page($page = 'hiden-page-option')
 		if($('#post_ID').val() == ".$value."){\n
 			$('#post').find('#delete-action').remove();\n
 		}\n
-		";
+		";		
 	}
 	foreach ($data_post as $key => $value) {
 		echo "\n//$('table.posts #post-".$value." span.trash').remove();\n
